@@ -1,6 +1,6 @@
-# tradexa_assignment
+## Movie App 
 
-A new Flutter project.
+Fetching data from OMDB API.
 
 ## Getting Started
 
