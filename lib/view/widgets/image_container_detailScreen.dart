@@ -4,12 +4,12 @@ import 'package:tradexa_assignment/view/widgets/custom_text.dart';
 
 import 'custom_image_button.dart';
 
-class imageContainerWidget extends StatelessWidget {
+class ImageContainerWidget extends StatelessWidget {
   final String title;
   final String poster;
   final String genre;
 
-  const imageContainerWidget({
+  const ImageContainerWidget({
     Key key,
     @required this.title,
     @required this.poster,

@@ -23,7 +23,7 @@ class MovieDetailView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              imageContainerWidget(
+              ImageContainerWidget(
                 title: movieModel.title,
                 genre: movieModel.genre,
                 poster: movieModel.poster,

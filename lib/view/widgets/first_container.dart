@@ -59,7 +59,7 @@ class FirstContainer extends StatelessWidget {
                   textColor: primaryWhite.withOpacity(0.6),
                 ),
                 customText(
-                  text: "${imdbRating}/10",
+                  text: "$imdbRating/10",
                   fontSize: 20,
                 ),
               ],

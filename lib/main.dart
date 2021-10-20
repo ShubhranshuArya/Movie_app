@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tradexa_assignment/view/screens/movie_detail_view.dart';
 import 'package:tradexa_assignment/view/screens/search_view.dart';
 
 void main() {

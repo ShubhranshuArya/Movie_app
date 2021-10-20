@@ -12,12 +12,19 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   MovieModel _movieModel;
+  bool _isLoading = false;
 
   void fetchMovie() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     var movie = await MovieApiService.getMovies();
     if (movie != null) {
-      _movieModel = movie;
-      print("init");
+      setState(() {
+        _movieModel = movie;
+        _isLoading = false;
+      });
     }
   }
 
@@ -45,31 +52,33 @@ class _SearchViewState extends State<SearchView> {
                 SizedBox(
                   height: 32,
                 ),
-                Expanded(
-                  child: ListView.separated(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: 3,
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        height: 32,
-                      );
-                    },
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => MovieDetailView(
-                                movieModel: _movieModel,
-                              ),
-                            ),
-                          );
-                        },
-                        child: _movieListItem(movieModel: _movieModel),
-                      );
-                    },
-                  ),
-                ),
+                _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : Expanded(
+                        child: ListView.separated(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: 3,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: 32,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => MovieDetailView(
+                                      movieModel: _movieModel,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: _movieListItem(movieModel: _movieModel),
+                            );
+                          },
+                        ),
+                      ),
                 SizedBox(
                   height: 24,
                 ),
@@ -166,10 +175,9 @@ class _SearchViewState extends State<SearchView> {
                       width: 4,
                     ),
                     customText(
-                      text: "${movieModel.imdbRating} /10",
-                      fontSize: 14,
-                      textColor: primaryDarkPurple
-                    ),
+                        text: "${movieModel.imdbRating} /10",
+                        fontSize: 14,
+                        textColor: primaryDarkPurple),
                   ],
                 ),
               ),

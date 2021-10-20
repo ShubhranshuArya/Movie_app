@@ -13,7 +13,7 @@ class MovieApiService {
       return movieModelFromJson(jsonString);
     } else {
       print(response.reasonPhrase);
-      MovieModel();
+      return MovieModel();
     }
   }
 }

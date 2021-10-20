@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tradexa_assignment/helper/constants/color_constants.dart';
 
 class CustomImageButton extends StatelessWidget {
-  double contSize;
-  String image;
-  double opacity;
-  double imgSize;
-  Color bgColor;
+  final double contSize;
+  final String image;
+  final double opacity;
+  final double imgSize;
+  final Color bgColor;
 
   CustomImageButton({
     @required this.contSize,
