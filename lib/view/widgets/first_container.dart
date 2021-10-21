@@ -5,21 +5,21 @@ import 'package:tradexa_assignment/view/widgets/custom_text.dart';
 class FirstContainer extends StatelessWidget {
   
   final String imdbRating;
-  final String rottenTomatoes;
-  final String metaCritic;
+  final String popularity;
+  final String voteCount;
 
   const FirstContainer({
     Key key,
     
     @required this.imdbRating,
-    @required this.rottenTomatoes,
-    @required this.metaCritic,
+    @required this.popularity,
+    @required this.voteCount,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 204,
+      height: 152,
       width: 320,
       decoration: BoxDecoration(
         color: primaryPurple,
@@ -48,18 +48,18 @@ class FirstContainer extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 customText(
-                  text: "Internet Movie\nDatabase",
+                  text: "Popularity",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   textColor: primaryWhite.withOpacity(0.6),
                 ),
                 customText(
-                  text: "$imdbRating/10",
+                  text: popularity,
                   fontSize: 20,
                 ),
               ],
@@ -69,29 +69,13 @@ class FirstContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 customText(
-                  text: "Rotten Tomatoes",
+                  text: "Vote Count",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   textColor: primaryWhite.withOpacity(0.6),
                 ),
                 customText(
-                  text: rottenTomatoes,
-                  fontSize: 20,
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                customText(
-                  text: "Metacritic",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  textColor: primaryWhite.withOpacity(0.6),
-                ),
-                customText(
-                  text: metaCritic,
+                  text: voteCount,
                   fontSize: 20,
                 ),
               ],

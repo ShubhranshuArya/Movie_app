@@ -7,7 +7,7 @@ Widget customText({
   double fontSize = 12,
   Color textColor = Colors.white,
   FontWeight fontWeight = FontWeight.normal,
-  // double height = 1.2,
+  TextAlign textAlign = TextAlign.center,
 }) {
   return Text(
     text,
@@ -15,11 +15,7 @@ Widget customText({
       color: textColor,
       fontSize: fontSize,
       fontWeight: fontWeight,
-      // height: height,
-      
-      
     ),
-    // textWidthBasis: TextWidthBasis.parent,
-    
+    textAlign: textAlign,
   );
 }

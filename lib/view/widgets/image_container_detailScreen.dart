@@ -7,13 +7,11 @@ import 'custom_image_button.dart';
 class ImageContainerWidget extends StatelessWidget {
   final String title;
   final String poster;
-  final String genre;
 
   const ImageContainerWidget({
     Key key,
     @required this.title,
     @required this.poster,
-    @required this.genre,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -58,19 +56,10 @@ class ImageContainerWidget extends StatelessWidget {
                   bgColor: primaryWhite.withOpacity(0.4),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  customText(
-                    text: title,
-                    fontSize: 34,
-                  ),
-                  SizedBox(height: 20),
-                  customText(
-                    text: genre,
-                    fontSize: 20,
-                  ),
-                ],
+              customText(
+                text: title,
+                fontSize: 34,
+                textAlign: TextAlign.start,
               ),
             ],
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tradexa_assignment/helper/constants/color_constants.dart';
-import 'package:tradexa_assignment/model/movie_model.dart';
+import 'package:tradexa_assignment/model/movies_model.dart';
 import 'package:tradexa_assignment/services/movie_api_service.dart';
 import 'package:tradexa_assignment/view/screens/movie_detail_view.dart';
 import 'package:tradexa_assignment/view/widgets/custom_text.dart';
@@ -11,7 +11,7 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  MovieModel _movieModel;
+  MoviesModel _moviesModel;
   bool _isLoading = false;
 
   void fetchMovie() async {
@@ -22,7 +22,7 @@ class _SearchViewState extends State<SearchView> {
     var movie = await MovieApiService.getMovies();
     if (movie != null) {
       setState(() {
-        _movieModel = movie;
+        _moviesModel = movie;
         _isLoading = false;
       });
     }
@@ -48,7 +48,14 @@ class _SearchViewState extends State<SearchView> {
           child: Center(
             child: Column(
               children: [
-                _searchWidget(),
+                SizedBox(
+                  height: 32,
+                ),
+                customText(
+                  text: "Most Popular\nMovies",
+                  fontSize: 32,
+                  textColor: primaryWhite.withOpacity(0.8),
+                ),
                 SizedBox(
                   height: 32,
                 ),
@@ -57,7 +64,7 @@ class _SearchViewState extends State<SearchView> {
                     : Expanded(
                         child: ListView.separated(
                           physics: BouncingScrollPhysics(),
-                          itemCount: 3,
+                          itemCount: 10,
                           separatorBuilder: (context, index) {
                             return SizedBox(
                               height: 32,
@@ -69,12 +76,16 @@ class _SearchViewState extends State<SearchView> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => MovieDetailView(
-                                      movieModel: _movieModel,
+                                      moviesModel: _moviesModel,
+                                      index: index,
                                     ),
                                   ),
                                 );
                               },
-                              child: _movieListItem(movieModel: _movieModel),
+                              child: _movieListItem(
+                                moviesModel: _moviesModel,
+                                index: index,
+                              ),
                             );
                           },
                         ),
@@ -90,53 +101,9 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 
-  Padding _searchWidget() {
-    return Padding(
-      padding: EdgeInsets.only(top: 40),
-      child: Container(
-        height: 48,
-        width: 320,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: primaryWhite.withOpacity(0.2),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(
-                    "assets/Frame.png",
-                    height: 24,
-                    width: 24,
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  customText(
-                    text: "Avengers: Endgame",
-                    fontSize: 18,
-                    textColor: primaryWhite.withOpacity(0.8),
-                  )
-                ],
-              ),
-              Image.asset(
-                "assets/Group 220.png",
-                height: 24,
-                width: 24,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Column _movieListItem({
-    @required MovieModel movieModel,
+    @required MoviesModel moviesModel,
+    @required int index,
   }) {
     return Column(
       children: [
@@ -147,7 +114,7 @@ class _SearchViewState extends State<SearchView> {
             borderRadius: BorderRadius.circular(40),
             image: DecorationImage(
               image: NetworkImage(
-                movieModel.poster,
+                "https://image.tmdb.org/t/p/original/${moviesModel.results[index].backdropPath}",
               ),
               fit: BoxFit.cover,
             ),
@@ -172,12 +139,13 @@ class _SearchViewState extends State<SearchView> {
                       width: 14,
                     ),
                     SizedBox(
-                      width: 4,
+                      width: 8,
                     ),
                     customText(
-                        text: "${movieModel.imdbRating} /10",
-                        fontSize: 14,
-                        textColor: primaryDarkPurple),
+                      text: "${moviesModel.results[index].voteAverage} /10",
+                      fontSize: 14,
+                      textColor: primaryDarkPurple,
+                    ),
                   ],
                 ),
               ),
@@ -189,31 +157,13 @@ class _SearchViewState extends State<SearchView> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: customText(
-              text: movieModel.title,
+              text: moviesModel.results[index].title,
               fontSize: 22,
+              textAlign: TextAlign.start,
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 40, top: 8),
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/Group 356.png",
-                height: 24,
-                width: 24,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              customText(
-                text: movieModel.runtime,
-                fontSize: 18,
-                textColor: primaryYellow,
-              ),
-            ],
-          ),
-        ),
+        
       ],
     );
   }
