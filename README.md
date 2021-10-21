@@ -1,6 +1,6 @@
 ## Movie App 
 
-Fetching data from OMDB API.
+Fetching data from API.
 
 ## Getting Started
 
