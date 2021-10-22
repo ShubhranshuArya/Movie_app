@@ -1,6 +1,6 @@
 ## Movie App 
 
-Fetching data from API.
+Fetching data from TMDB API.
 
 ## Getting Started
 
